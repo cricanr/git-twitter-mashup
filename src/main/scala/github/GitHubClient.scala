@@ -9,7 +9,7 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.duration.Duration
 import scala.language.postfixOps
 
-case class GitHubRepository(name: String, url: String, description: String, score: Double)
+case class GitHubRepository(name: String, url: String, description: String, score: Double, totalCount: Int)
 case class Failure(message: String) extends Throwable
 
 class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: ExecutionContext) {
@@ -23,7 +23,7 @@ class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: Exec
         (wsResponse.status, wsResponse.body) match {
           case (responseStatusCode, _) if responseStatusCode >= 200 && responseStatusCode < 300 =>
             println(s"github search results: ${wsResponse.body}")
-            Good(GitHubRepository(wsResponse.body, "desc", "", 21))
+            Good(GitHubRepository(wsResponse.body, "desc", "", 21, 10))
           case (clientFailureStatusCode, body) =>
             // TODO
             Bad(Failure("clientFailure.... "))
@@ -55,7 +55,7 @@ object GitHubRepository {
         description <- c.downField("items").downArray.downField("description").as[String]
         score <- c.downField("items").downArray.downField("score").as[Double]
       } yield {
-        new GitHubRepository(name, url, description, score)
+        new GitHubRepository(name, url, description, score, totalCount)
       }
   }
 }

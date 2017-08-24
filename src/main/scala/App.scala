@@ -3,11 +3,10 @@ package com.apis.gitTwitterMashup
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import com.apis.gitTwitterMashup.git.{GitHubClient, GitHubRepository}
+import com.apis.gitTwitterMashup.twitter.TwitterClient
 import play.api.libs.ws.ahc._
-import twitter.TwitterClient
 
 import scala.concurrent.ExecutionContext.Implicits.global
-
 
 object App {
   private val query = "reactive"
@@ -117,7 +116,97 @@ object App {
                                              "watchers": 370,
                                              "default_branch": "master",
                                              "score": 97.50721
-                                         }]}"""
+                                         },
+                                           {
+             "id": 94343410,
+             "name": "reactive",
+             "full_name": "tower120/reactive",
+             "owner": {
+                 "login": "tower120",
+                 "id": 2050822,
+                 "avatar_url": "https://avatars1.githubusercontent.com/u/2050822?v=4",
+                 "gravatar_id": "",
+                 "url": "https://api.github.com/users/tower120",
+                 "html_url": "https://github.com/tower120",
+                 "followers_url": "https://api.github.com/users/tower120/followers",
+                 "following_url": "https://api.github.com/users/tower120/following{/other_user}",
+                 "gists_url": "https://api.github.com/users/tower120/gists{/gist_id}",
+                 "starred_url": "https://api.github.com/users/tower120/starred{/owner}{/repo}",
+                 "subscriptions_url": "https://api.github.com/users/tower120/subscriptions",
+                 "organizations_url": "https://api.github.com/users/tower120/orgs",
+                 "repos_url": "https://api.github.com/users/tower120/repos",
+                 "events_url": "https://api.github.com/users/tower120/events{/privacy}",
+                 "received_events_url": "https://api.github.com/users/tower120/received_events",
+                 "type": "User",
+                 "site_admin": false
+             },
+             "private": false,
+             "html_url": "https://github.com/tower120/reactive",
+             "description": "Simple, non intrusive reactive programming library for C++. (Events + Observable Properties + Reactive Properties)",
+             "fork": false,
+             "url": "https://api.github.com/repos/tower120/reactive",
+             "forks_url": "https://api.github.com/repos/tower120/reactive/forks",
+             "keys_url": "https://api.github.com/repos/tower120/reactive/keys{/key_id}",
+             "collaborators_url": "https://api.github.com/repos/tower120/reactive/collaborators{/collaborator}",
+             "teams_url": "https://api.github.com/repos/tower120/reactive/teams",
+             "hooks_url": "https://api.github.com/repos/tower120/reactive/hooks",
+             "issue_events_url": "https://api.github.com/repos/tower120/reactive/issues/events{/number}",
+             "events_url": "https://api.github.com/repos/tower120/reactive/events",
+             "assignees_url": "https://api.github.com/repos/tower120/reactive/assignees{/user}",
+             "branches_url": "https://api.github.com/repos/tower120/reactive/branches{/branch}",
+             "tags_url": "https://api.github.com/repos/tower120/reactive/tags",
+             "blobs_url": "https://api.github.com/repos/tower120/reactive/git/blobs{/sha}",
+             "git_tags_url": "https://api.github.com/repos/tower120/reactive/git/tags{/sha}",
+             "git_refs_url": "https://api.github.com/repos/tower120/reactive/git/refs{/sha}",
+             "trees_url": "https://api.github.com/repos/tower120/reactive/git/trees{/sha}",
+             "statuses_url": "https://api.github.com/repos/tower120/reactive/statuses/{sha}",
+             "languages_url": "https://api.github.com/repos/tower120/reactive/languages",
+             "stargazers_url": "https://api.github.com/repos/tower120/reactive/stargazers",
+             "contributors_url": "https://api.github.com/repos/tower120/reactive/contributors",
+             "subscribers_url": "https://api.github.com/repos/tower120/reactive/subscribers",
+             "subscription_url": "https://api.github.com/repos/tower120/reactive/subscription",
+             "commits_url": "https://api.github.com/repos/tower120/reactive/commits{/sha}",
+             "git_commits_url": "https://api.github.com/repos/tower120/reactive/git/commits{/sha}",
+             "comments_url": "https://api.github.com/repos/tower120/reactive/comments{/number}",
+             "issue_comment_url": "https://api.github.com/repos/tower120/reactive/issues/comments{/number}",
+             "contents_url": "https://api.github.com/repos/tower120/reactive/contents/{+path}",
+             "compare_url": "https://api.github.com/repos/tower120/reactive/compare/{base}...{head}",
+             "merges_url": "https://api.github.com/repos/tower120/reactive/merges",
+             "archive_url": "https://api.github.com/repos/tower120/reactive/{archive_format}{/ref}",
+             "downloads_url": "https://api.github.com/repos/tower120/reactive/downloads",
+             "issues_url": "https://api.github.com/repos/tower120/reactive/issues{/number}",
+             "pulls_url": "https://api.github.com/repos/tower120/reactive/pulls{/number}",
+             "milestones_url": "https://api.github.com/repos/tower120/reactive/milestones{/number}",
+             "notifications_url": "https://api.github.com/repos/tower120/reactive/notifications{?since,all,participating}",
+             "labels_url": "https://api.github.com/repos/tower120/reactive/labels{/name}",
+             "releases_url": "https://api.github.com/repos/tower120/reactive/releases{/id}",
+             "deployments_url": "https://api.github.com/repos/tower120/reactive/deployments",
+             "created_at": "2017-06-14T15:01:55Z",
+             "updated_at": "2017-08-19T11:10:29Z",
+             "pushed_at": "2017-07-07T20:15:34Z",
+             "git_url": "git://github.com/tower120/reactive.git",
+             "ssh_url": "git@github.com:tower120/reactive.git",
+             "clone_url": "https://github.com/tower120/reactive.git",
+             "svn_url": "https://github.com/tower120/reactive",
+             "homepage": null,
+             "size": 54,
+             "stargazers_count": 27,
+             "watchers_count": 27,
+             "language": "C++",
+             "has_issues": true,
+             "has_projects": true,
+             "has_downloads": true,
+             "has_wiki": true,
+             "has_pages": false,
+             "forks_count": 1,
+             "mirror_url": null,
+             "open_issues_count": 0,
+             "forks": 1,
+             "open_issues": 0,
+             "watchers": 27,
+             "default_branch": "master",
+             "score": 31.648472
+         }]}"""
     val g = GitHubRepository.jsonParse(json)
 
 
