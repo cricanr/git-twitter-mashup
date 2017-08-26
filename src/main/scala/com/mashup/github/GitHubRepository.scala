@@ -1,14 +1,15 @@
 package com.mashup.github
 
+import io.circe.Decoder.Result
+
 case class GitHubConfig(endpoint: String, timeout: Int)
 
 case class GitHubRepository(name: String, url: String, description: String, score: Double)
 case class GitHubRepositories(totalCount: Int, repositories: List[GitHubRepository])
 
 object GitHubRepository {
-
-  import cats.syntax.either._
   import io.circe._
+  import io.circe.generic.semiauto._
   import io.circe.parser._
 
   implicit val decodeGitHubRepository: Decoder[GitHubRepository] = new Decoder[GitHubRepository] {
@@ -29,7 +30,10 @@ object GitHubRepository {
       } yield GitHubRepositories(totalCount, repositories)
   }
 
-  def jsonParse(json: String) = {
+  implicit val gitHubRepositoryEncoder: Encoder[GitHubRepository] = deriveEncoder
+  implicit val gitHubRepositoriesEncoder: Encoder[GitHubRepositories] = deriveEncoder
+
+  def jsonParse(json: String): Result[GitHubRepositories] = {
     parse(json).getOrElse(Json.Null).as[GitHubRepositories]
   }
 }
