@@ -2,21 +2,24 @@ package com.mashup
 
 import com.mashup.RepositoryTweetsSummary._
 import com.mashup.github._
-import com.mashup.twitter.{TweetSummary, TwitterClient}
+import com.mashup.twitter.{TweetSummary, TwitterClient, TwitterConfig}
 import io.circe.syntax._
 import org.scalactic.{Bad, Good}
+
 import scala.concurrent.ExecutionContext
 
 class Mashup(gitHubClient: GitHubClient, twitterClient: TwitterClient) {
   def outputMergeResults(query: String)
-           (implicit gitHubConfig: GitHubConfig, executionContext: ExecutionContext): Unit = {
+           (implicit gitHubConfig: GitHubConfig,
+            twitterConfig: TwitterConfig,
+            executionContext: ExecutionContext): Unit = {
     val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(query, gitHubConfig.endpoint, gitHubConfig.timeout)
 
     reposOrFailureFuture.foreach {
       case Good(repos) =>
         repos.repositories.map {
           repository =>
-            val tweetsOrFailureFuture = twitterClient.getTweetsByQuery(repository.name)
+            val tweetsOrFailureFuture = twitterClient.getTweetsByQuery(repository.name, twitterConfig.tweetsToFetchCount)
             tweetsOrFailureFuture.map {
               case Good(tweetsSummary: List[TweetSummary]) =>
                 val repositoryTweetsSummary = RepositoryTweetsSummary(repository, tweetsSummary)

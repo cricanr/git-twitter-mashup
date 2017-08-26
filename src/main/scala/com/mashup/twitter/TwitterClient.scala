@@ -12,10 +12,12 @@ class TwitterClient {
 
   private val client = TwitterRestClient()
 
-  def getTweetsByQuery(query: String)(implicit executionContext: ExecutionContext): Future[List[TweetSummary] Or TwitterFailure] = {
-    val tweetsFuture = client.searchTweet(query = query, count = 10, include_entities = false,
+  def getTweetsByQuery(query: String, count: Int)
+                      (implicit executionContext: ExecutionContext,
+                       twitterConfig: TwitterConfig): Future[List[TweetSummary] Or TwitterFailure] = {
+    val tweetsFuture = client.searchTweet(query = query, count = count, include_entities = false,
       result_type = ResultType.Mixed, locale = Some("en"),
-      until = Some(LocalDate.now().minusDays(getTweetsUntilDays)))
+      until = Some(LocalDate.now().minusDays(twitterConfig.tweetsUntilDays)))
 
     tweetsFuture.map{ tweets =>
       val tweetsSummary = tweets.data.statuses.map { tweet =>

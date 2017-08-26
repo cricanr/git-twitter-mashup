@@ -5,6 +5,7 @@ import io.circe.generic.semiauto._
 import io.circe.syntax._
 import org.joda.time.DateTime
 
+case class TwitterConfig(tweetsUntilDays: Int, tweetsToFetchCount: Int)
 case class TweetSummary(retweetCount: Long, text: String, user: String, createdAt: DateTime)
 
 object TweetSummary {
