@@ -7,7 +7,7 @@ case class GitHubConfig(endpoint: String, timeout: Int)
 case class GitHubRepository(name: String, url: String, description: String, score: Double)
 case class GitHubRepositories(totalCount: Int, repositories: List[GitHubRepository])
 
-object GitHubRepository {
+object GitHubRepositories {
   import io.circe._
   import io.circe.generic.semiauto._
   import io.circe.parser._

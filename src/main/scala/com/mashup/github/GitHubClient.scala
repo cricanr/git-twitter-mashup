@@ -10,7 +10,8 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.language.postfixOps
 
 class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: ExecutionContext) {
-  def getRepositoriesByKeyword(keyword: String, uri: String, timeout: Int): Future[Or[GitHubRepositories, GitFailure]] = {
+  def getRepositoriesByKeyword(keyword: String, uri: String, timeout: Int):
+  Future[Or[GitHubRepositories, GitFailure]] = {
     val request = wsClient.url(uri)
       .withRequestTimeout(Duration(timeout, TimeUnit.SECONDS))
     val futureResponse = request.get()
@@ -18,7 +19,7 @@ class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: Exec
       wsResponse =>
         (wsResponse.status, wsResponse.body) match {
           case (responseStatusCode, _) if responseStatusCode >= 200 && responseStatusCode < 300 =>
-            val reactiveRepositoriesParseRes = GitHubRepository.jsonParse(wsResponse.body)
+            val reactiveRepositoriesParseRes = GitHubRepositories.jsonParse(wsResponse.body)
             reactiveRepositoriesParseRes match {
               case Right(repos) =>
                 Good(repos)
