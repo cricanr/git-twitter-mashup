@@ -21,6 +21,7 @@ libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.3.1",
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic" % circeVersion,
-  "io.circe" %% "circe-parser" % circeVersion)
+  "io.circe" %% "circe-parser" % circeVersion,
+  "org.mockito" % "mockito-core" % "2.8.47" % "test")
 
 initialCommands := "import example._"

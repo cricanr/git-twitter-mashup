@@ -13,7 +13,7 @@ class Mashup(gitHubClient: GitHubClient, twitterClient: TwitterClient) {
            (implicit gitHubConfig: GitHubConfig,
             twitterConfig: TwitterConfig,
             executionContext: ExecutionContext): Unit = {
-    val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(query, gitHubConfig.endpoint, gitHubConfig.timeout)
+    val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(gitHubClient.buildRequest(gitHubConfig.endpoint, gitHubConfig.timeout), query)
 
     reposOrFailureFuture.foreach {
       case Good(repos) =>

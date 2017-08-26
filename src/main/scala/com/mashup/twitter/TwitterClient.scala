@@ -2,7 +2,6 @@ package com.mashup.twitter
 
 import java.time.LocalDate
 import com.danielasfregola.twitter4s.entities.enums.ResultType
-import com.mashup.Configuration._
 import org.joda.time.DateTime
 import org.scalactic.{Bad, Good, Or}
 import scala.concurrent.{ExecutionContext, Future}
