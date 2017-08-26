@@ -20,7 +20,7 @@ class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: Exec
         case f: Throwable =>
           val errorMessage = s"failed call to get GitHub repositories containing keyword: $keyword"
           println(errorMessage)
-          Bad(GeneralGitFailure(errorMessage))
+          Bad(GenericGitFailure(errorMessage))
     }
   }
 
@@ -38,14 +38,13 @@ class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: Exec
             Good(repos)
           case Left(failure) =>
             println(s"There was a problem decoding the github repositories found by searching for $keyword keyword. See more details: ${failure.getClass}:${failure.message}")
-            Bad(GeneralGitFailure(s"There was a problem decoding the github repositories found by searching for $keyword keyword. See more details: ${failure.getClass}:${failure.message}"))
+            Bad(GenericGitFailure(s"There was a problem decoding the github repositories found by searching for $keyword keyword. See more details: ${failure.getClass}:${failure.message}"))
         }
-      case (clientFailureStatusCode, body) =>
+      case (clientFailureStatusCode, body) if clientFailureStatusCode >= 400 && clientFailureStatusCode < 500 =>
         Bad(ClientGitFailure(clientFailureStatusCode, body))
-      case _ =>
-        val errorMessage = "Internal server error"
-        println(errorMessage)
-        Bad(GeneralGitFailure(errorMessage))
+      case (serverFailureStatusCode, body) =>
+        println(body)
+        Bad(ServerGitFailure(serverFailureStatusCode, body))
     }
   }
 }

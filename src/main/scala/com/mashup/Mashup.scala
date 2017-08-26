@@ -39,7 +39,7 @@ class Mashup(gitHubClient: GitHubClient, twitterClient: TwitterClient) {
       case Bad(clientGitFailure: ClientGitFailure) =>
         println(s"Client failure calling Git API to fetch repositories containing: $query + \n " +
           s"with failure: ${clientGitFailure.statusCode}: ${clientGitFailure.message}")
-      case Bad(genericGitFailure: GeneralGitFailure) =>
+      case Bad(genericGitFailure: ServerGitFailure) =>
         println(s"Failed calling Git API to fetch repositories containing: $query +\n " +
           s"with failure: ${genericGitFailure.message}")
       case _ =>
