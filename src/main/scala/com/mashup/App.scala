@@ -26,32 +26,22 @@ object App {
     val twitterClient = new TwitterClient()
 
     val mashup = new Mashup(gitHubClient, twitterClient)
+
+    val sc = new java.util.Scanner(System.in)
+
+    println(s"\nWelcome! This console app will next get 10 github projects containing the keyword: ${query}." +
+      s"\nAfter that for each repository found it will take from Twitter API tweets older as " +
+      s"\n${Configuration.getTweetsUntilDays} containing the name of these repos. The resulting summary of " +
+      s"\nrepos with attached tweets summary will be printed out to the console in JSON format! Enjoy!" +
+      s"\n-----------------------------------------------------------------------------------------------" +
+      s"\nIn order to quit just press 'quit'" +
+      s"\n-----------------------------------------------------------------------------------------------" +
+      s"\n")
+
     mashup.outputMergeResults(query)
 
-//    val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(query, gitHubConfig.endpoint, gitHubConfig.timeout)
-//
-//    reposOrFailureFuture.foreach {
-//      reposOrFailure =>
-//        reposOrFailure.map {
-//          repos: GitHubRepositories =>
-//            repos.repositories.foreach {
-//              repository =>
-//                val tweetsSummaryOrFailureFuture = twitterClient.getTweetsByQuery(repository.name)
-//                tweetsSummaryOrFailureFuture.map {
-//                  case Good(tweetsSummary: List[TweetSummary]) =>
-//                    val repositoryTweetsSummary = new RepositoryTweetsSummary(repository, tweetsSummary)
-//                    val repositoryTweetsSummaryJson = repositoryTweetsSummary.asJson
-//                    println(repositoryTweetsSummaryJson)
-//                  case Bad(failure) =>
-//                    println(s"Failed calling Twitter API to fetch tweets for repository: ${repository.name} " +
-//                      s"with failure: ${failure.getClass}")
-//                }.failed.foreach {
-//                  failure: Throwable =>
-//                    println("s\"Failed calling Twitter API to fetch tweets for repository: ${repository.name} \" +\n " +
-//                      s"with failure: ${failure.getClass}: ${failure.getMessage}")
-//                }
-//            }
-//        }
-//    }
+    while(true)
+      if (sc.next().toLowerCase == "quit".toLowerCase)
+        System.exit(1)
   }
 }
