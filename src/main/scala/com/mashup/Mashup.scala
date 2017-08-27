@@ -13,13 +13,14 @@ class Mashup(gitHubClient: GitHubClient, twitterClient: TwitterClient) {
            (implicit gitHubConfig: GitHubConfig,
             twitterConfig: TwitterConfig,
             executionContext: ExecutionContext): Unit = {
-    val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(gitHubClient.buildRequest(gitHubConfig.endpoint, gitHubConfig.timeout), query)
+    val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(
+      gitHubClient.buildRequest(gitHubConfig.endpoint, gitHubConfig.timeout), query)
 
     reposOrFailureFuture.foreach {
       case Good(repos) =>
         repos.repositories.map {
           repository =>
-            val tweetsOrFailureFuture = twitterClient.getTweetsByQuery(repository.name, twitterConfig.tweetsToFetchCount)
+            val tweetsOrFailureFuture = twitterClient.getTweetsByQuery(repository.name, twitterConfig.tweetsToFetchCount, twitterConfig.tweetsUntilDays)
             tweetsOrFailureFuture.map {
               case Good(tweetsSummary: List[TweetSummary]) =>
                 val repositoryTweetsSummary = RepositoryTweetsSummary(repository, tweetsSummary)

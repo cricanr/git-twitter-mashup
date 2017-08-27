@@ -1,10 +1,8 @@
 package com.mashup.github
 
 import java.util.concurrent.TimeUnit
-
 import org.scalactic.{Bad, Good, Or}
 import play.api.libs.ws.{StandaloneWSClient, StandaloneWSRequest, StandaloneWSResponse}
-
 import scala.concurrent.duration.Duration
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.postfixOps
@@ -24,7 +22,7 @@ class GitHubClient(wsClient: StandaloneWSClient)(implicit executionContext: Exec
     }
   }
 
-  def buildRequest(uri: String, timeout: Int) = {
+  def buildRequest(uri: String, timeout: Int): StandaloneWSRequest#Self = {
     wsClient.url(uri)
       .withRequestTimeout(Duration(timeout, TimeUnit.SECONDS))
   }

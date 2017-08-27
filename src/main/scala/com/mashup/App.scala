@@ -2,10 +2,10 @@ package com.mashup
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
+import com.danielasfregola.twitter4s.TwitterRestClient
 import com.mashup.github.{GitHubClient, GitHubConfig}
 import com.mashup.twitter.{TwitterClient, TwitterConfig}
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
-
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object App {
@@ -23,9 +23,9 @@ object App {
     }
 
     val wsClient = StandaloneAhcWSClient()
-
+    val twitterRestClient = TwitterRestClient()
     val gitHubClient = new GitHubClient(wsClient)
-    val twitterClient = new TwitterClient()
+    val twitterClient = new TwitterClient(twitterRestClient)
 
     val mashup = new Mashup(gitHubClient, twitterClient)
 
