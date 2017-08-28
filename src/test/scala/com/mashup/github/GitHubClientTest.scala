@@ -11,17 +11,11 @@ import org.scalactic.{Bad, Good}
 import org.scalatest.concurrent.Eventually
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{MustMatchers, WordSpec}
-import play.api.libs.ws.{StandaloneWSRequest, StandaloneWSResponse}
+import play.api.libs.ws.StandaloneWSResponse
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
-import play.shaded.ahc.io.netty.handler.codec.http.HttpResponse
-import play.shaded.ahc.org.asynchttpclient.{HttpResponseStatus, Response}
-import play.shaded.ahc.org.asynchttpclient.netty.{NettyResponse, NettyResponseStatus}
-import play.shaded.ahc.org.asynchttpclient.uri.Uri
 
-import scala.concurrent.duration.{Duration, FiniteDuration}
-import java.util.concurrent.TimeUnit
-
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.FiniteDuration
 
 class GitHubClientTest extends WordSpec with MustMatchers with MockitoSugar with Eventually {
   "The GitHub API Client" when {

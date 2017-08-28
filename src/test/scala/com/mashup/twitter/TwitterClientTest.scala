@@ -20,13 +20,11 @@ class TwitterClientTest extends WordSpec with MustMatchers with MockitoSugar {
     val countOfTweetsToFetch = 10
     val tweetToFetchUntilDays = 1
 
-    // TODO: possible improve, test mapping from Tweeter API entity to Tweet summary
     "calling getTweetsByQuery with a query" should {
       "return a list of tweet summary items" in {
         val twitterRestClientMock = mock[TwitterRestClient]
         val twitterClient = new TwitterClient(twitterRestClientMock)
 
-        val ratedDataMock = mock[RatedData[StatusSearch]]
         val result = Future.successful(RatedData[StatusSearch](RateLimit(1, 1, 2),
           StatusSearch(List.empty, SearchMetadata(1, 1, "", None, "", "", 1, 2, ""))))
 
@@ -47,7 +45,6 @@ class TwitterClientTest extends WordSpec with MustMatchers with MockitoSugar {
         val twitterRestClientMock = mock[TwitterRestClient]
         val twitterClient = new TwitterClient(twitterRestClientMock)
 
-        val ratedDataMock = mock[RatedData[StatusSearch]]
         val result = Future.failed(new Exception("ohh something broke!"))
 
         when(twitterRestClientMock.searchTweet(query = query, count = countOfTweetsToFetch,
