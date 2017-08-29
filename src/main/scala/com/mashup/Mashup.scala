@@ -8,8 +8,8 @@ import org.scalactic.{Bad, Good, Or}
 import scala.concurrent.{ExecutionContext, Future}
 
 class Mashup(gitHubClient: GitHubClient, twitterClient: TwitterClient) {
-  def outputMergeResults(query: String)
-                        (implicit gitHubConfig: GitHubConfig,
+  def outputMergedResults(query: String)
+                         (implicit gitHubConfig: GitHubConfig,
                          twitterConfig: TwitterConfig,
                          executionContext: ExecutionContext): Unit = {
     val reposOrFailureFuture = gitHubClient.getRepositoriesByKeyword(

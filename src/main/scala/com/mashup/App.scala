@@ -40,7 +40,7 @@ object App {
       s"\n-----------------------------------------------------------------------------------------------" +
       s"\n")
 
-    mashup.outputMergeResults(query)
+    mashup.outputMergedResults(query)
 
     while (true)
       if (sc.next().toLowerCase == "quit".toLowerCase)
