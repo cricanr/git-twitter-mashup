@@ -53,3 +53,5 @@ Decided on using twitter4s in order to not re-invent the o-auth twitter API REST
 - Could introduce logback and print messages this way, instead of using println statements
 - Mashup could refactore and return RepositoryTweetsSummary so that it could in the future easily
 used in another context where for example we put on a website the results instead of println statements
+- make mocking work fine for currently ignored test (unfortunately I did not manage to finish this in time)
+  "call parseResponse once"
