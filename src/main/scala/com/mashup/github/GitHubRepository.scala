@@ -37,5 +37,3 @@ object GitHubRepositories {
     parse(json).getOrElse(Json.Null).as[GitHubRepositories]
   }
 }
-
-// test
