@@ -17,7 +17,7 @@ object Configuration {
   }
 
   def getGitHubConfig: GitHubConfig = {
-    val githubApiEndpoint = Try(conf.getString("github-api-endpoint")).getOrElse("Invalid github api endpoint provided. Please check config file.")
+    val githubApiEndpoint = Try(conf.getString("github-api-endpoint")).getOrElse("Invalid github api endpoint provided. Please check config file if correct.")
     val gitHubApiTimeout = Try(conf.getInt("github-api-timeout")).getOrElse(300)
 
     GitHubConfig(githubApiEndpoint, gitHubApiTimeout)
